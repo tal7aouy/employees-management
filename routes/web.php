@@ -1,5 +1,13 @@
 <?php
 
+namespace App;
+
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\StateController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,8 +32,18 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
 
-require __DIR__.'/auth.php';
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+    Route::resource('/users', UserController::class)->except('show');
+    Route::resource('/countries', CountryController::class)->except('show');
+    Route::resource('/states', StateController::class)->except('show');
+    Route::resource('/cities', CityController::class)->except('show');
+    Route::resource('/departments', DepartmentController::class)->except('show');
+    Route::resource('/employees', EmployeeController::class)->except('show');
+});
+
+// require auth
+require __DIR__ . '/auth.php';

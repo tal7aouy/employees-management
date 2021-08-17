@@ -3,8 +3,12 @@
 
     <form @submit.prevent="submit">
         <div>
-            <breeze-label for="name" value="Name" />
-            <breeze-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
+            <breeze-label for="username" value="User Name" />
+            <breeze-input id="username" type="text" class="mt-1 block w-full" v-model="form.username" required autofocus autocomplete="username" />
+        </div> 
+         <div>
+            <breeze-label for="fullname" value="Full Name" />
+            <breeze-input id="fullname" type="text" class="mt-1 block w-full" v-model="form.fullname" required autofocus autocomplete="fullname" />
         </div>
 
         <div class="mt-4">
@@ -54,7 +58,8 @@
         data() {
             return {
                 form: this.$inertia.form({
-                    name: '',
+                    username: '',
+                    fullname: '',
                     email: '',
                     password: '',
                     password_confirmation: '',
